@@ -233,6 +233,7 @@ Observable acceptance:
 - [x] Redesign polish: font-size compounding fix + recent-rooms label truncation, commits 86c7e0b/1cecafe; suite 39/39 (2026-07-20)
 - [x] Bugfix round (user reports): stale checkmarks after New Round (protocol leak, clearPeerVotes in applyRemoteState higher-round branch + newRound, commits 749f206/53100d0), row-height jump on vote (fixed indicator tokens + row min-height, bc90a11), "(you)" label → self-row accent highlight (58dd533, + 879f9fe border alignment); reviews code/security/perf APPROVED; cmux two-window P2P verification PASS (real Nostr peering, both New Round paths, 66px stable row, 0px name offset); suite 46/46 (2026-07-20)
 - [x] Card-overflow fix round (user screenshot: labels '0.1'/'0.2' touching mini-card border): width-by-content + length-based font tiers on CardPicker and Board indicators, shared labelSizeClass in deck.ts (code-point length), commits 04e0559/f43f99c/fbdf6f7/83cacbf/61ae9d7; reviews code/security/perf clean; cmux QA PASS (gaps ≥8.5px, row 66px stable); suite 53/53 (2026-07-20)
+- [x] Vote-indicator restyle (user: убрать обводку, центрировать): revealed vote = plain centered text, fixed-width span.vote-slot eliminates reveal shift (was 8.3px → 0), commits d7ce275/c56dd33/2ff2b61; code-review APPROVE, cmux QA PASS (slot x/width identical all states, row 66px); suite 53/53 (2026-07-20)
 
 ## Surprises & Discoveries
 
@@ -269,6 +270,7 @@ Observable acceptance:
 - **2026-07-20 · teamlead** — Decision: own row marked visually (3px accent left border, transparent on other rows to keep alignment + elevated bg), "(you)" text removed per user preference.
 - **2026-07-20 · user** — Decision: published as public repo scrum-poker-p2p with a SINGLE squashed commit; granular history kept only locally in dev-history. Rationale: user request ("пусть коммит будет 1"); tree verified byte-identical to the 46-commit history before push.
 - **2026-07-20** — Decision: card label font tiers by code-point length (≤2 full, 3 medium, ≥4 small) with width growing to content; per-surface CSS size tokens, shared length→tier mapping. Rationale: user-reported overflow on decimal custom decks; single source prevents drift (2026-07-20).
+- **2026-07-20** — Decision: vote indicator wrapped in fixed-width slot (--size-vote-slot-w 3rem); card-back chip keeps natural size centered inside; revealed value is chromeless centered text. Rationale: user disliked double border; slot decouples alignment from per-state chrome so reveal has zero horizontal shift (2026-07-20).
 
 ## Outcomes & Retrospective
 
