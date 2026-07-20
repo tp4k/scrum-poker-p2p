@@ -121,41 +121,31 @@
   .peer-vote {
     color: var(--color-text-secondary);
     font-weight: 600;
-    min-width: 2.25rem;
+    min-width: var(--size-vote-indicator-w);
+    height: var(--size-vote-indicator-h);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .peer-vote.card-back,
-  .peer-vote.mini-card {
-    width: auto;
-    min-width: var(--size-vote-indicator-w);
-    height: var(--size-vote-indicator-h);
-    padding: 0 var(--space-2);
-    border-radius: calc(var(--radius) * 0.6);
-    border: 1px solid var(--color-border);
     font-size: var(--font-size-vote);
   }
 
-  .peer-vote.card-back.label-md,
-  .peer-vote.mini-card.label-md {
+  .peer-vote.label-md {
     font-size: var(--font-size-vote-md);
   }
 
-  .peer-vote.card-back.label-sm,
-  .peer-vote.mini-card.label-sm {
+  .peer-vote.label-sm {
     font-size: var(--font-size-vote-sm);
   }
 
   .peer-vote.card-back {
+    padding: 0 var(--space-2);
+    border-radius: calc(var(--radius) * 0.6);
+    border: 1px solid var(--color-accent-strong);
     background: var(--color-accent);
-    border-color: var(--color-accent-strong);
     color: var(--color-accent-text);
   }
 
   .peer-vote.mini-card {
-    background: var(--color-surface-elevated);
     color: var(--color-text-primary);
   }
 
