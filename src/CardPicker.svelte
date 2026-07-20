@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { labelSizeClass } from './lib/deck'
+  import { isFractionalCard } from './lib/deck'
 
   interface Props {
     cards: string[]
@@ -14,7 +14,8 @@
   {#each cards as card (card)}
     <button
       type="button"
-      class="card {labelSizeClass(card)}"
+      class="card"
+      class:label-fraction={isFractionalCard(card)}
       class:selected={card === selected}
       aria-pressed={card === selected}
       onclick={() => onVote(card)}
@@ -52,12 +53,8 @@
       background var(--transition-fast);
   }
 
-  .card.label-md {
-    font-size: var(--font-size-card-md);
-  }
-
-  .card.label-sm {
-    font-size: var(--font-size-card-sm);
+  .card.label-fraction {
+    font-size: var(--font-size-card-fraction);
   }
 
   .card:hover {

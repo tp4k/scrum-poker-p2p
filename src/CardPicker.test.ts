@@ -22,13 +22,11 @@ describe('CardPicker', () => {
     expect(screen.getByRole('button', { name: '3' })).toHaveAttribute('aria-pressed', 'false')
   })
 
-  it('label font scale: long labels get a smaller-font class, short ones do not', () => {
+  it('label font scale: fractional values get a smaller-font class, integers do not', () => {
     render(CardPicker, { cards: ['5', '100', '0.25'], selected: null, onVote: vi.fn() })
 
-    expect(screen.getByRole('button', { name: '5' })).not.toHaveClass('label-md', 'label-sm')
-    expect(screen.getByRole('button', { name: '100' })).toHaveClass('label-md')
-    expect(screen.getByRole('button', { name: '100' })).not.toHaveClass('label-sm')
-    expect(screen.getByRole('button', { name: '0.25' })).toHaveClass('label-sm')
-    expect(screen.getByRole('button', { name: '0.25' })).not.toHaveClass('label-md')
+    expect(screen.getByRole('button', { name: '5' })).not.toHaveClass('label-fraction')
+    expect(screen.getByRole('button', { name: '100' })).not.toHaveClass('label-fraction')
+    expect(screen.getByRole('button', { name: '0.25' })).toHaveClass('label-fraction')
   })
 })

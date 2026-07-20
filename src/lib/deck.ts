@@ -37,12 +37,7 @@ export function average(cards: string[]): number | null {
   return sum / numericCards.length
 }
 
-const LABEL_LENGTH_MEDIUM = 3
-const LABEL_LENGTH_LONG = 4
-
-export function labelSizeClass(label: string): string {
-  const length = [...label].length
-  if (length >= LABEL_LENGTH_LONG) return 'label-sm'
-  if (length === LABEL_LENGTH_MEDIUM) return 'label-md'
-  return ''
+export function isFractionalCard(card: string): boolean {
+  const value = parseFloat(card)
+  return Number.isFinite(value) && !Number.isInteger(value)
 }

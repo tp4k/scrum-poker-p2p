@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { labelSizeClass } from './lib/deck'
+  import { isFractionalCard } from './lib/deck'
 
   export interface BoardPeer {
     name: string
@@ -63,7 +63,8 @@
         <span class="peer-name">{row.name}</span>
         <span class="vote-slot">
           <span
-            class="peer-vote {labelSizeClass(displayLabel(row))}"
+            class="peer-vote"
+            class:label-fraction={isFractionalCard(displayLabel(row))}
             class:card-back={row.vote !== null && !revealed}
             class:mini-card={row.vote !== null && revealed}
           >
@@ -134,12 +135,8 @@
     font-size: var(--font-size-vote);
   }
 
-  .peer-vote.label-md {
-    font-size: var(--font-size-vote-md);
-  }
-
-  .peer-vote.label-sm {
-    font-size: var(--font-size-vote-sm);
+  .peer-vote.label-fraction {
+    font-size: var(--font-size-vote-fraction);
   }
 
   .peer-vote.card-back {

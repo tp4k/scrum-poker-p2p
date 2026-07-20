@@ -13,8 +13,7 @@
   --font-size-lg: 1.25rem;
   --font-size-xl: 1.75rem;
   --font-size-card: 1.5rem;
-  --font-size-card-md: 1.125rem; /* card label length === 3 */
-  --font-size-card-sm: 0.875rem; /* card label length >= 4 */
+  --font-size-card-fraction: 1.125rem; /* fractional card values (e.g. 0.5) */
   --font-family-base:
     system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
@@ -49,9 +48,8 @@
   --size-vote-indicator-w: 1.5rem;
   --size-vote-indicator-h: 2.25rem;
   --size-vote-slot-w: 3rem; /* fixed outer slot: fits the widest real label, incl. label-sm */
-  --font-size-vote: 1rem; /* vote label length <= 2 */
-  --font-size-vote-md: 0.8125rem; /* vote label length === 3 */
-  --font-size-vote-sm: 0.6875rem; /* vote label length >= 4 */
+  --font-size-vote: 1rem; /* whole-number and non-numeric vote glyphs */
+  --font-size-vote-fraction: 0.8125rem; /* fractional revealed vote values */
 
   /* CardPicker card box */
   --size-card-min-w: 3.5rem;

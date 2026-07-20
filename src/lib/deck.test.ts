@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { PRESETS, average, decodeDeck, encodeDeck, isNumericCard, labelSizeClass } from './deck'
+import { PRESETS, average, decodeDeck, encodeDeck, isFractionalCard, isNumericCard } from './deck'
 
 const CUSTOM_DECK = ['1', '2', '4', '8']
 
@@ -54,24 +54,17 @@ describe('average', () => {
   })
 })
 
-describe('labelSizeClass', () => {
-  it('is empty for a short label', () => {
-    expect(labelSizeClass('5')).toBe('')
+describe('isFractionalCard', () => {
+  it('is true for fractional numeric values', () => {
+    expect(isFractionalCard('0.5')).toBe(true)
+    expect(isFractionalCard('0.25')).toBe(true)
   })
 
-  it('is the medium-size class for a 3-character label', () => {
-    expect(labelSizeClass('100')).toBe('label-md')
-  })
-
-  it('is the long-size class for a 4-character label', () => {
-    expect(labelSizeClass('0.25')).toBe('label-sm')
-  })
-
-  it('counts astral emoji as a single code point, not two UTF-16 units', () => {
-    expect(labelSizeClass('👍')).toBe('')
-  })
-
-  it('counts a BMP symbol as a single code point', () => {
-    expect(labelSizeClass('☕')).toBe('')
+  it('is false for integer or non-numeric values', () => {
+    expect(isFractionalCard('5')).toBe(false)
+    expect(isFractionalCard('100')).toBe(false)
+    expect(isFractionalCard('1')).toBe(false)
+    expect(isFractionalCard('☕')).toBe(false)
+    expect(isFractionalCard('?')).toBe(false)
   })
 })

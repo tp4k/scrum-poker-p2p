@@ -78,27 +78,25 @@ describe('Board', () => {
     expect(shown.getByText('8')).toBeInTheDocument()
   })
 
-  it('mini-card label font scale: long revealed votes get a smaller-font class, short ones do not', () => {
+  it('mini-card label font scale: fractional revealed votes get a smaller-font class, integers do not', () => {
     const short = render(
       Board,
       baseProps({ peers: { p1: { name: 'Bob', vote: '5' } }, revealed: true })
     )
-    expect(short.getByText('5')).not.toHaveClass('label-md', 'label-sm')
+    expect(short.getByText('5')).not.toHaveClass('label-fraction')
     short.unmount()
 
     const medium = render(
       Board,
       baseProps({ peers: { p1: { name: 'Bob', vote: '100' } }, revealed: true })
     )
-    expect(medium.getByText('100')).toHaveClass('label-md')
-    expect(medium.getByText('100')).not.toHaveClass('label-sm')
+    expect(medium.getByText('100')).not.toHaveClass('label-fraction')
     medium.unmount()
 
-    const long = render(
+    const fraction = render(
       Board,
       baseProps({ peers: { p1: { name: 'Bob', vote: '0.25' } }, revealed: true })
     )
-    expect(long.getByText('0.25')).toHaveClass('label-sm')
-    expect(long.getByText('0.25')).not.toHaveClass('label-md')
+    expect(fraction.getByText('0.25')).toHaveClass('label-fraction')
   })
 })
