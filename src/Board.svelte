@@ -47,6 +47,20 @@
     if (!isRevealed || value === null) return EMPTY_AVERAGE_GLYPH
     return value.toFixed(AVERAGE_DECIMAL_PLACES)
   }
+
+  const LABEL_LENGTH_MEDIUM = 3
+  const LABEL_LENGTH_LONG = 4
+
+  function displayLabel(row: BoardRow): string {
+    if (row.vote === null) return NOT_VOTED_GLYPH
+    return revealed ? row.vote : VOTED_GLYPH
+  }
+
+  function labelSizeClass(label: string): string {
+    if (label.length >= LABEL_LENGTH_LONG) return 'label-sm'
+    if (label.length === LABEL_LENGTH_MEDIUM) return 'label-md'
+    return ''
+  }
 </script>
 
 <section class="board">
@@ -55,17 +69,11 @@
       <li class="peer" class:self-row={row.isSelf}>
         <span class="peer-name">{row.name}</span>
         <span
-          class="peer-vote"
+          class="peer-vote {labelSizeClass(displayLabel(row))}"
           class:card-back={row.vote !== null && !revealed}
           class:mini-card={row.vote !== null && revealed}
         >
-          {#if row.vote === null}
-            {NOT_VOTED_GLYPH}
-          {:else if revealed}
-            {row.vote}
-          {:else}
-            {VOTED_GLYPH}
-          {/if}
+          {displayLabel(row)}
         </span>
       </li>
     {/each}
@@ -128,12 +136,23 @@
 
   .peer-vote.card-back,
   .peer-vote.mini-card {
-    width: var(--size-vote-indicator-w);
+    width: auto;
     min-width: var(--size-vote-indicator-w);
     height: var(--size-vote-indicator-h);
-    padding: var(--space-1);
+    padding: 0 var(--space-2);
     border-radius: calc(var(--radius) * 0.6);
     border: 1px solid var(--color-border);
+    font-size: var(--font-size-vote);
+  }
+
+  .peer-vote.card-back.label-md,
+  .peer-vote.mini-card.label-md {
+    font-size: var(--font-size-vote-md);
+  }
+
+  .peer-vote.card-back.label-sm,
+  .peer-vote.mini-card.label-sm {
+    font-size: var(--font-size-vote-sm);
   }
 
   .peer-vote.card-back {
