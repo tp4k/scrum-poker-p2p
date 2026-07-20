@@ -123,6 +123,8 @@
     font-weight: 600;
     min-width: var(--size-vote-indicator-w);
     height: var(--size-vote-indicator-h);
+    padding: 0 var(--space-2);
+    border: 1px solid transparent;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -138,9 +140,8 @@
   }
 
   .peer-vote.card-back {
-    padding: 0 var(--space-2);
     border-radius: calc(var(--radius) * 0.6);
-    border: 1px solid var(--color-accent-strong);
+    border-color: var(--color-accent-strong);
     background: var(--color-accent);
     color: var(--color-accent-text);
   }
