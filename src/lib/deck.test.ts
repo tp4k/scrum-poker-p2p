@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { PRESETS, average, decodeDeck, encodeDeck, isNumericCard } from './deck'
+import { PRESETS, average, decodeDeck, encodeDeck, isNumericCard, labelSizeClass } from './deck'
 
 const CUSTOM_DECK = ['1', '2', '4', '8']
 
@@ -51,5 +51,27 @@ describe('average', () => {
 
   it('is null when no card is numeric', () => {
     expect(average(['XS', 'M'])).toBeNull()
+  })
+})
+
+describe('labelSizeClass', () => {
+  it('is empty for a short label', () => {
+    expect(labelSizeClass('5')).toBe('')
+  })
+
+  it('is the medium-size class for a 3-character label', () => {
+    expect(labelSizeClass('100')).toBe('label-md')
+  })
+
+  it('is the long-size class for a 4-character label', () => {
+    expect(labelSizeClass('0.25')).toBe('label-sm')
+  })
+
+  it('counts astral emoji as a single code point, not two UTF-16 units', () => {
+    expect(labelSizeClass('👍')).toBe('')
+  })
+
+  it('counts a BMP symbol as a single code point', () => {
+    expect(labelSizeClass('☕')).toBe('')
   })
 })
