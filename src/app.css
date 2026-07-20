@@ -13,6 +13,8 @@
   --font-size-lg: 1.25rem;
   --font-size-xl: 1.75rem;
   --font-size-card: 1.5rem;
+  --font-size-card-md: 1.125rem; /* card label length === 3 */
+  --font-size-card-sm: 0.875rem; /* card label length >= 4 */
   --font-family-base:
     system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
@@ -46,6 +48,13 @@
   /* Vote indicator (card-back / mini-card) */
   --size-vote-indicator-w: 1.5rem;
   --size-vote-indicator-h: 2.25rem;
+  --font-size-vote: 1rem; /* vote label length <= 2 */
+  --font-size-vote-md: 0.8125rem; /* vote label length === 3 */
+  --font-size-vote-sm: 0.6875rem; /* vote label length >= 4 */
+
+  /* CardPicker card box */
+  --size-card-min-w: 3.5rem;
+  --size-card-h: 5.25rem;
 }
 
 * {

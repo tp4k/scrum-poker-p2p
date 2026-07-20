@@ -6,13 +6,22 @@
   }
 
   const { cards, selected, onVote }: Props = $props()
+
+  const LABEL_LENGTH_MEDIUM = 3
+  const LABEL_LENGTH_LONG = 4
+
+  function labelSizeClass(label: string): string {
+    if (label.length >= LABEL_LENGTH_LONG) return 'label-sm'
+    if (label.length === LABEL_LENGTH_MEDIUM) return 'label-md'
+    return ''
+  }
 </script>
 
 <div class="card-picker">
   {#each cards as card (card)}
     <button
       type="button"
-      class="card"
+      class="card {labelSizeClass(card)}"
       class:selected={card === selected}
       aria-pressed={card === selected}
       onclick={() => onVote(card)}
@@ -30,8 +39,9 @@
   }
 
   .card {
-    min-width: 3.5rem;
-    aspect-ratio: 2 / 3;
+    min-width: var(--size-card-min-w);
+    width: auto;
+    height: var(--size-card-h);
     padding: var(--space-2);
     border-radius: var(--radius);
     border: 1px solid var(--color-border);
@@ -47,6 +57,14 @@
       transform var(--transition-fast),
       border-color var(--transition-fast),
       background var(--transition-fast);
+  }
+
+  .card.label-md {
+    font-size: var(--font-size-card-md);
+  }
+
+  .card.label-sm {
+    font-size: var(--font-size-card-sm);
   }
 
   .card:hover {
