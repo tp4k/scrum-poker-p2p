@@ -75,10 +75,23 @@
     {/each}
   </ul>
 
-  <div class="average">Average: <span>{formatAverage(average, revealed)}</span></div>
+  <div class="average">
+    <span class="average-label">Average</span>
+    <span class="average-value">{formatAverage(average, revealed)}</span>
+  </div>
   <div class="controls">
-    <button type="button" onclick={onReveal} disabled={revealDisabled}>Reveal</button>
-    <button type="button" onclick={onNewRound}>New Round</button>
+    <button
+      type="button"
+      class:primary={!revealed}
+      class:ghost={revealed}
+      onclick={onReveal}
+      disabled={revealDisabled || revealed}
+    >
+      Reveal
+    </button>
+    <button type="button" class:ghost={!revealed} class:primary={revealed} onclick={onNewRound}>
+      New Round
+    </button>
   </div>
 </section>
 
@@ -157,12 +170,27 @@
   }
 
   .average {
-    font-size: var(--font-size-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .average-label {
+    font-size: var(--font-size-secondary);
+    color: var(--color-text-secondary);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .average-value {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
     color: var(--color-text-primary);
   }
 
   .controls {
     display: flex;
+    justify-content: space-between;
     gap: var(--space-3);
   }
 
@@ -177,6 +205,7 @@
     cursor: pointer;
     transition:
       border-color var(--transition-fast),
+      background var(--transition-fast),
       transform var(--transition-fast);
   }
 
@@ -187,5 +216,22 @@
   button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  button.primary {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-accent-text);
+  }
+
+  button.primary:hover:not(:disabled) {
+    border-color: var(--color-accent-strong);
+    background: var(--color-accent-strong);
+  }
+
+  button.ghost {
+    background: transparent;
+    border-color: var(--color-border);
+    color: var(--color-text-secondary);
   }
 </style>

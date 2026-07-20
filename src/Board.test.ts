@@ -29,6 +29,25 @@ describe('Board', () => {
     expect(oneVote.getByRole('button', { name: 'Reveal' })).toBeEnabled()
   })
 
+  it('button hierarchy: Reveal is primary before reveal, New Round is primary and Reveal is disabled after', () => {
+    const beforeReveal = render(
+      Board,
+      baseProps({ peers: { p1: { name: 'Bob', vote: '5' } }, revealed: false })
+    )
+    expect(beforeReveal.getByRole('button', { name: 'Reveal' })).toHaveClass('primary')
+    expect(beforeReveal.getByRole('button', { name: 'Reveal' })).toBeEnabled()
+    expect(beforeReveal.getByRole('button', { name: 'New Round' })).not.toHaveClass('primary')
+    beforeReveal.unmount()
+
+    const afterReveal = render(
+      Board,
+      baseProps({ peers: { p1: { name: 'Bob', vote: '5' } }, revealed: true })
+    )
+    expect(afterReveal.getByRole('button', { name: 'New Round' })).toHaveClass('primary')
+    expect(afterReveal.getByRole('button', { name: 'Reveal' })).not.toHaveClass('primary')
+    expect(afterReveal.getByRole('button', { name: 'Reveal' })).toBeDisabled()
+  })
+
   it('average formatting', () => {
     const whole = render(Board, baseProps({ average: 4, revealed: true }))
     expect(whole.getByText('4.0')).toBeInTheDocument()
