@@ -137,11 +137,10 @@
         {slug}
       </span>
       <span class="status {connectionState}" role="status">
-        <span
-          class="status-dot"
-          aria-label={statusText === '' ? 'Connected' : undefined}
-        ></span>
-        {#if statusText !== ''}
+        <span class="status-dot"></span>
+        {#if statusText === ''}
+          <span class="sr-only">Connected</span>
+        {:else}
           {statusText}
         {/if}
       </span>
@@ -232,6 +231,19 @@
     width: var(--size-status-dot);
     height: var(--size-status-dot);
     border-radius: 50%;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
   }
 
   .status.connecting .status-dot {
