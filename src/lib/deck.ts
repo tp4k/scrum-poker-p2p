@@ -36,3 +36,13 @@ export function average(cards: string[]): number | null {
   const sum = numericCards.reduce((total, card) => total + parseFloat(card), 0)
   return sum / numericCards.length
 }
+
+const LABEL_LENGTH_MEDIUM = 3
+const LABEL_LENGTH_LONG = 4
+
+export function labelSizeClass(label: string): string {
+  const length = [...label].length
+  if (length >= LABEL_LENGTH_LONG) return 'label-sm'
+  if (length === LABEL_LENGTH_MEDIUM) return 'label-md'
+  return ''
+}
