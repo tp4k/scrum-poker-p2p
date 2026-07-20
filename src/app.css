@@ -43,11 +43,12 @@
 
   --radius: 0.5rem;
   --transition-fast: 120ms ease;
+  --duration-status-pulse: 1.6s;
 
   /* Vote indicator (card-back / mini-card) */
   --size-vote-indicator-w: 1.5rem;
   --size-vote-indicator-h: 2.25rem;
-  --size-vote-slot-w: 3rem; /* fixed outer slot: fits the widest real label, incl. label-sm */
+  --size-vote-slot-w: 3rem; /* fixed outer slot: fits the widest real label, incl. label-fraction */
   --font-size-vote: 1rem; /* whole-number and non-numeric vote glyphs */
   --font-size-vote-fraction: 0.8125rem; /* fractional revealed vote values */
 

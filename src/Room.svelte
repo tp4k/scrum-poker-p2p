@@ -242,7 +242,7 @@
 
   @media (prefers-reduced-motion: no-preference) {
     .status.connecting .status-dot {
-      animation: status-dot-pulse 1.6s ease-in-out infinite;
+      animation: status-dot-pulse var(--duration-status-pulse) ease-in-out infinite;
     }
   }
 
