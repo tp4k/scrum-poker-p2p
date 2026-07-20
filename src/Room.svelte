@@ -59,6 +59,7 @@
   let selfId = $state('')
   let connectionState: ConnectionState = $state('connecting')
   let peers: Record<string, PeerInfo> = $state({})
+  const statusText = $derived(connectionLabel(connectionState, Object.keys(peers).length))
   let localVote: string | null = $state(null)
   let revealed = $state(false)
   let average: number | null = $state(null)
@@ -114,7 +115,7 @@
   function connectionLabel(state: ConnectionState, peerCount: number): string {
     if (state === 'connecting') return 'Connecting…'
     if (state === 'ready') {
-      return peerCount === 0 ? 'Waiting for teammates — share the link' : 'Connected'
+      return peerCount === 0 ? 'Waiting for teammates — share the link' : ''
     }
     return 'Connection failed'
   }
@@ -135,9 +136,14 @@
       >
         {slug}
       </span>
-      <span class="status {connectionState}">
-        <span class="status-dot"></span>
-        {connectionLabel(connectionState, Object.keys(peers).length)}
+      <span class="status {connectionState}" role="status">
+        <span
+          class="status-dot"
+          aria-label={statusText === '' ? 'Connected' : undefined}
+        ></span>
+        {#if statusText !== ''}
+          {statusText}
+        {/if}
       </span>
     </div>
     <CardPicker cards={deckCards} selected={localVote} onVote={(card) => room?.vote(card)} />
