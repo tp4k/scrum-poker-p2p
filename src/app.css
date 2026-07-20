@@ -1,0 +1,71 @@
+:root {
+  /* Spacing scale (geometric-ish; used for every padding/margin/gap in the app) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2.5rem;
+
+  /* Type scale */
+  --font-size-base: 1.0625rem; /* 17px */
+  --font-size-secondary: 0.875rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.75rem;
+  --font-size-card: 1.5rem;
+  --font-family-base:
+    system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Colors: base surfaces */
+  --color-bg: #0c1220;
+  --color-surface: #182233;
+  --color-surface-elevated: #212e44;
+  --color-border: #607288;
+  --color-border-strong: #7c8ea4;
+
+  /* Colors: text */
+  --color-text-primary: #f4f6fb;
+  --color-text-secondary: #b9c4d9;
+
+  /* Colors: accent */
+  --color-accent: #5b9dff;
+  --color-accent-strong: #3d7fe0;
+  --color-accent-text: #04101f;
+
+  /* Colors: status pairs (text + tinted background) */
+  --color-success-text: #8fe3ad;
+  --color-success-bg: #123822;
+  --color-danger-text: #ffa1a1;
+  --color-danger-bg: #4a1414;
+  --color-warn-text: #ffd479;
+  --color-warn-bg: #4a3208;
+
+  --radius: 0.5rem;
+  --transition-fast: 120ms ease;
+
+  /* Vote indicator (card-back / mini-card) */
+  --size-vote-indicator-w: 1.5rem;
+  --size-vote-indicator-h: 2.25rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--font-size-base);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-base);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
