@@ -226,8 +226,8 @@ Observable acceptance:
 - [x] Browser testing via cmux (teamlead phase): multi-tab scenario — vote / change vote / reveal from another tab / new round from a third / tab close / refresh mid-round / late join after reveal (2026-07-20, WORKS_WITH_ISSUES — full E2E two-window P2P sync verified over public Nostr relays: vote/reveal/average/new-round propagated correctly)
 - [x] Rework round 3: QA findings — stuck "Connection failed" banner, ghost-peer pruning, recent-rooms label (2026-07-20, commits a88b606, 89ae969; 39/39 tests; verification code-review APPROVED)
 - [x] Focused browser re-test of connection fixes — ENV-BLOCKED (sandbox blocked WebRTC ICE this session; fixes verified via pure-function unit tests + code inspection) (2026-07-20)
-- [ ] User post-deploy step: create GitHub repo (public, personal) and push
-- [ ] User post-deploy step: enable Pages → Source = GitHub Actions in repo settings
+- [x] User post-deploy step: create GitHub repo (public, personal) and push (2026-07-20, github.com/tp4k/scrum-poker-p2p, single squashed commit 8f4027d; full history preserved in local branch dev-history)
+- [x] User post-deploy step: enable Pages → Source = GitHub Actions in repo settings (2026-07-20, deploy workflow succeeded after one re-run — first run raced the Pages enablement; live at https://tp4k.github.io/scrum-poker-p2p/, HTTP 200, built app verified)
 - [ ] User post-deploy step: run `#/diag` network matrix (home↔home, home↔VPN, VPN↔VPN) from real networks, both directions
 - [x] Redesign round (user request: more whitespace, AA accessibility): design tokens src/app.css + playing-card UI, commits 395a0ba/f46aa8c/f6e2119/508f6c9 — code+security+perf reviews all APPROVED; cmux visual QA LOOKS_GOOD (2026-07-20)
 - [x] Redesign polish: font-size compounding fix + recent-rooms label truncation, commits 86c7e0b/1cecafe; suite 39/39 (2026-07-20)
@@ -266,8 +266,11 @@ Observable acceptance:
 - **2026-07-20 · user+teamlead** — Decision: cards restyled as 2:3 playing cards with accent selected state; screen structure unchanged (user chose "cards + air" over full poker-table redesign).
 - **2026-07-20 · teamlead** — Decision: protocol round-advance now clears ALL stored peer votes on both presser (newRound) and receivers (higher-round adoption), via shared pure clearPeerVotes; no rebroadcast added — laggard resend path remains the reconvergence mechanism. Rationale: diagnosed dual leak meant stale ✓ persisted until next vote; either fix alone doesn't converge.
 - **2026-07-20 · teamlead** — Decision: own row marked visually (3px accent left border, transparent on other rows to keep alignment + elevated bg), "(you)" text removed per user preference.
+- **2026-07-20 · user** — Decision: published as public repo scrum-poker-p2p with a SINGLE squashed commit; granular history kept only locally in dev-history. Rationale: user request ("пусть коммит будет 1"); tree verified byte-identical to the 46-commit history before push.
 
 ## Outcomes & Retrospective
 
 Delivered a fully client-only Scrum Poker (Svelte 5 + Vite + TS + Trystero/Nostr) in 27 commits with strict red/green TDD; 39 unit tests green, svelte-check clean, build clean. Three review rounds (code/security/perf) plus two browser QA sessions found and fixed 13 findings total: pre-reveal average leak, stale room handle on room→room nav, localStorage SecurityError crash, socket-driven ready state, poll/peerLog hygiene, malformed-`d` white-screen DoS, remote-payload validation (round/name/vote), stuck failed-banner, ghost-peer pruning, and recent-rooms label. Full two-window E2E over public Nostr relays succeeded in QA session 1, with votes, reveal, average, and new-round all syncing correctly between peers. The blank-#app-after-churn observation from QA session 1 remains deferred as unreproducible with no error captured. The turnConfig/mqtt contingencies called out as the project's main risk in the approved plan are not yet wired in — they await the user's real-network matrix via `#/diag` post-deploy, and QA session 2's TURN-required ICE failure (see Surprises & Discoveries) underscores that this risk is live, not theoretical. Remaining user steps: create the GitHub repo, push, enable Pages (Source = GitHub Actions), and run the network matrix home↔VPN from real networks.
+
+Deployed and live at https://tp4k.github.io/scrum-poker-p2p/; remaining: user's real-network connectivity matrix via `#/diag` (home↔VPN), with turnConfig/Open Relay as the ready contingency.
 </content>
