@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { labelSizeClass } from './lib/deck'
+
   export interface BoardPeer {
     name: string
     vote: string | null
@@ -48,18 +50,9 @@
     return value.toFixed(AVERAGE_DECIMAL_PLACES)
   }
 
-  const LABEL_LENGTH_MEDIUM = 3
-  const LABEL_LENGTH_LONG = 4
-
   function displayLabel(row: BoardRow): string {
     if (row.vote === null) return NOT_VOTED_GLYPH
     return revealed ? row.vote : VOTED_GLYPH
-  }
-
-  function labelSizeClass(label: string): string {
-    if (label.length >= LABEL_LENGTH_LONG) return 'label-sm'
-    if (label.length === LABEL_LENGTH_MEDIUM) return 'label-md'
-    return ''
   }
 </script>
 

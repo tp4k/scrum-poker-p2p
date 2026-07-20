@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { labelSizeClass } from './lib/deck'
+
   interface Props {
     cards: string[]
     selected: string | null
@@ -6,15 +8,6 @@
   }
 
   const { cards, selected, onVote }: Props = $props()
-
-  const LABEL_LENGTH_MEDIUM = 3
-  const LABEL_LENGTH_LONG = 4
-
-  function labelSizeClass(label: string): string {
-    if (label.length >= LABEL_LENGTH_LONG) return 'label-sm'
-    if (label.length === LABEL_LENGTH_MEDIUM) return 'label-md'
-    return ''
-  }
 </script>
 
 <div class="card-picker">
