@@ -54,6 +54,9 @@
   /* CardPicker card box */
   --size-card-min-w: 3.5rem;
   --size-card-h: 5.25rem;
+
+  /* Room header status indicator */
+  --size-status-dot: 0.5rem;
 }
 
 * {

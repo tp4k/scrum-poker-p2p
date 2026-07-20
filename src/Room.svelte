@@ -128,9 +128,18 @@
       <button type="submit">Join room</button>
     </form>
   {:else}
-    <p class="connection {connectionState}">
-      {connectionLabel(connectionState, Object.keys(peers).length)}
-    </p>
+    <div class="room-header">
+      <span
+        class="room-slug"
+        style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace;"
+      >
+        {slug}
+      </span>
+      <span class="status {connectionState}">
+        <span class="status-dot"></span>
+        {connectionLabel(connectionState, Object.keys(peers).length)}
+      </span>
+    </div>
     <CardPicker cards={deckCards} selected={localVote} onVote={(card) => room?.vote(card)} />
     <Board
       {peers}
@@ -193,25 +202,57 @@
     border-color: var(--color-border-strong);
   }
 
-  .connection {
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius);
+  .room-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .room-slug {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
     font-size: var(--font-size-secondary);
-    width: fit-content;
+    color: var(--color-text-secondary);
   }
 
-  .connection.connecting {
-    background: var(--color-warn-bg);
-    color: var(--color-warn-text);
+  .status-dot {
+    width: var(--size-status-dot);
+    height: var(--size-status-dot);
+    border-radius: 50%;
   }
 
-  .connection.ready {
-    background: var(--color-success-bg);
-    color: var(--color-success-text);
+  .status.connecting .status-dot {
+    background: var(--color-warn-text);
   }
 
-  .connection.failed {
-    background: var(--color-danger-bg);
-    color: var(--color-danger-text);
+  .status.ready .status-dot {
+    background: var(--color-success-text);
+  }
+
+  .status.failed .status-dot {
+    background: var(--color-danger-text);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .status.connecting .status-dot {
+      animation: status-dot-pulse 1.6s ease-in-out infinite;
+    }
+  }
+
+  @keyframes status-dot-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.35;
+    }
   }
 </style>
