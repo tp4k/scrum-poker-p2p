@@ -1,9 +1,11 @@
 const FIBONACCI_DECK = ['0', '1', '2', '3', '5', '8', '13', '21', '?', '☕']
 const TSHIRT_DECK = ['XS', 'S', 'M', 'L', 'XL', '?']
+const FRACTIONAL_DECK = ['0.1', '0.2', '0.5', '1', '2', '?', '☕']
 
 export const PRESETS: Record<string, string[]> = {
   fib: FIBONACCI_DECK,
-  tshirt: TSHIRT_DECK
+  tshirt: TSHIRT_DECK,
+  frac: FRACTIONAL_DECK
 }
 
 function arraysEqual(a: string[], b: string[]): boolean {
@@ -13,12 +15,14 @@ function arraysEqual(a: string[], b: string[]): boolean {
 export function encodeDeck(cards: string[]): string {
   if (arraysEqual(cards, PRESETS.fib)) return 'fib'
   if (arraysEqual(cards, PRESETS.tshirt)) return 'tshirt'
+  if (arraysEqual(cards, PRESETS.frac)) return 'frac'
   return encodeURIComponent(cards.join(','))
 }
 
 export function decodeDeck(code: string): string[] {
   if (code === 'fib') return PRESETS.fib
   if (code === 'tshirt') return PRESETS.tshirt
+  if (code === 'frac') return PRESETS.frac
   try {
     return decodeURIComponent(code).split(',')
   } catch {

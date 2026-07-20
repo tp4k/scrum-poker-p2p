@@ -29,6 +29,7 @@
     const joined = cards.join(',')
     if (joined === PRESETS.fib.join(',')) return 'Fibonacci'
     if (joined === PRESETS.tshirt.join(',')) return 'T-shirt'
+    if (joined === PRESETS.frac.join(',')) return 'Fractional'
     return joined
   }
 

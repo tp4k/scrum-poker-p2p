@@ -19,6 +19,19 @@ describe('deck encode/decode', () => {
   it('encodes presets as their short alias', () => {
     expect(encodeDeck(PRESETS.fib)).toBe('fib')
     expect(encodeDeck(PRESETS.tshirt)).toBe('tshirt')
+    expect(encodeDeck(PRESETS.frac)).toBe('frac')
+  })
+
+  it('round-trips the Fractional preset through the URL d param', () => {
+    expect(decodeDeck(encodeDeck(PRESETS.frac))).toEqual(PRESETS.frac)
+  })
+
+  it('encodes the literal Fractional preset array as its short alias', () => {
+    expect(encodeDeck(['0.1', '0.2', '0.5', '1', '2', '?', '☕'])).toBe('frac')
+  })
+
+  it('decodes the frac alias to the Fractional preset', () => {
+    expect(decodeDeck('frac')).toEqual(['0.1', '0.2', '0.5', '1', '2', '?', '☕'])
   })
 
   it('falls back to the Fibonacci preset instead of throwing on a malformed percent-sequence', () => {

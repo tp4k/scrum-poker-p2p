@@ -5,7 +5,7 @@
   const RECENT_ROOMS_STORAGE_KEY = 'poker.recentRooms'
   const RECENT_ROOMS_CAP = 8
 
-  type DeckChoice = 'fib' | 'tshirt' | 'custom'
+  type DeckChoice = 'fib' | 'tshirt' | 'frac' | 'custom'
 
   interface RecentRoom {
     slug: string
@@ -33,6 +33,7 @@
   function selectedCards(): string[] {
     if (deckChoice === 'fib') return PRESETS.fib
     if (deckChoice === 'tshirt') return PRESETS.tshirt
+    if (deckChoice === 'frac') return PRESETS.frac
     return customDeckInput
       .split(',')
       .map((card) => card.trim())
@@ -68,6 +69,10 @@
     <label>
       <input type="radio" bind:group={deckChoice} value="tshirt" />
       T-shirt
+    </label>
+    <label>
+      <input type="radio" bind:group={deckChoice} value="frac" />
+      Fractional (0.1–2)
     </label>
     <label>
       <input type="radio" bind:group={deckChoice} value="custom" />
