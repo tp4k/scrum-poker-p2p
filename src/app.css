@@ -48,6 +48,7 @@
   /* Vote indicator (card-back / mini-card) */
   --size-vote-indicator-w: 1.5rem;
   --size-vote-indicator-h: 2.25rem;
+  --size-vote-slot-w: 3rem; /* fixed outer slot: fits the widest real label, incl. label-sm */
   --font-size-vote: 1rem; /* vote label length <= 2 */
   --font-size-vote-md: 0.8125rem; /* vote label length === 3 */
   --font-size-vote-sm: 0.6875rem; /* vote label length >= 4 */

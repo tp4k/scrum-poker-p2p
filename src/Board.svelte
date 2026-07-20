@@ -61,12 +61,14 @@
     {#each rows as row (row.id)}
       <li class="peer" class:self-row={row.isSelf}>
         <span class="peer-name">{row.name}</span>
-        <span
-          class="peer-vote {labelSizeClass(displayLabel(row))}"
-          class:card-back={row.vote !== null && !revealed}
-          class:mini-card={row.vote !== null && revealed}
-        >
-          {displayLabel(row)}
+        <span class="vote-slot">
+          <span
+            class="peer-vote {labelSizeClass(displayLabel(row))}"
+            class:card-back={row.vote !== null && !revealed}
+            class:mini-card={row.vote !== null && revealed}
+          >
+            {displayLabel(row)}
+          </span>
         </span>
       </li>
     {/each}
@@ -118,16 +120,17 @@
     font-size: var(--font-size-base);
   }
 
-  .peer-vote {
-    color: var(--color-text-secondary);
-    font-weight: 600;
-    min-width: var(--size-vote-indicator-w);
-    height: var(--size-vote-indicator-h);
-    padding: 0 var(--space-2);
-    border: 1px solid transparent;
+  .vote-slot {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: var(--size-vote-slot-w);
+    height: var(--size-vote-indicator-h);
+  }
+
+  .peer-vote {
+    color: var(--color-text-secondary);
+    font-weight: 600;
     font-size: var(--font-size-vote);
   }
 
@@ -140,8 +143,14 @@
   }
 
   .peer-vote.card-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--size-vote-indicator-w);
+    height: var(--size-vote-indicator-h);
+    padding: 0 var(--space-2);
     border-radius: calc(var(--radius) * 0.6);
-    border-color: var(--color-accent-strong);
+    border: 1px solid var(--color-accent-strong);
     background: var(--color-accent);
     color: var(--color-accent-text);
   }
